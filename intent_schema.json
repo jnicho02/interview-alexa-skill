@@ -13,8 +13,7 @@
             "intent": "AMAZON.HelpIntent"
         },
         {
-            "intent": "AMAZON.StopIntent",
-            "samples": ["stop", "off", "shut up"]
+            "intent": "AMAZON.StopIntent"
         },
         {
             "intent": "AMAZON.LoopOffIntent"
@@ -47,12 +46,10 @@
             "intent": "AMAZON.ShuffleOnIntent"
         },
         {
-            "intent": "AMAZON.StartOverIntent",
-            "samples": ["start over", "restart", "start again"]
+            "intent": "AMAZON.StartOverIntent"
         },
         {
-            "intent": "AMAZON.YesIntent",
-            "samples": ["yes", "yes please", "sure"]
+            "intent": "AMAZON.YesIntent"
         }
     ]
 }

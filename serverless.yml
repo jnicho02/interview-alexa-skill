@@ -23,3 +23,5 @@ package:
 functions:
   hello:
     handler: handler.hello
+    events:
+      - alexaSkill

@@ -6,7 +6,7 @@ py.test tests/test_handler.py
 
 # to create
 
-* created a new repo in github
+* added a new repo in github
 * cloned it locally
 $ npm install -g serverless
 $ serverless create --template aws-python
@@ -26,4 +26,9 @@ $ pip install -r requirements.txt
 $ py.test tests/test_handler.py
 
 $ sls deploy
-this created a new Alexa Skill with language English (U.K.), called 'interview' 2.5 kB
+this created updated the Lambda function
+
+created a new Alexa Skill with language English (U.K.)
+named it 'interview'
+added the interaction model (didn't use the builder as it insisted on submitting for testing!)
+configured the ARN from the Lambda function
