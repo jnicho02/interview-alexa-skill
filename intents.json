@@ -1,0 +1,58 @@
+{
+    "intents": [{
+            "intent": "CanItEat",
+            "slots": [{
+                "name": "food",
+                "type": "LIST_OF_FOODS"
+            }]
+        },
+        {
+            "intent": "AMAZON.CancelIntent"
+        },
+        {
+            "intent": "AMAZON.HelpIntent"
+        },
+        {
+            "intent": "AMAZON.StopIntent",
+            "samples": ["stop", "off", "shut up"]
+        },
+        {
+            "intent": "AMAZON.LoopOffIntent"
+        },
+        {
+            "intent": "AMAZON.LoopOnIntent"
+        },
+        {
+            "intent": "AMAZON.NextIntent"
+        },
+        {
+            "intent": "AMAZON.NoIntent"
+        },
+        {
+            "intent": "AMAZON.PauseIntent"
+        },
+        {
+            "intent": "AMAZON.PreviousIntent"
+        },
+        {
+            "intent": "AMAZON.RepeatIntent"
+        },
+        {
+            "intent": "AMAZON.ResumeIntent"
+        },
+        {
+            "intent": "AMAZON.ShuffleOffIntent"
+        },
+        {
+            "intent": "AMAZON.ShuffleOnIntent"
+        },
+        {
+            "intent": "AMAZON.StartOverIntent",
+            "samples": ["start over", "restart", "start again"]
+        },
+        {
+            "intent": "AMAZON.YesIntent",
+            "samples": ["yes", "yes please", "sure"]
+        }
+    ]
+}

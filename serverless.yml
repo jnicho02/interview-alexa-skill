@@ -1,0 +1,25 @@
+service: interview
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: eu-west-1
+
+package:
+  exclude:
+    - __pycache__/**
+    - .cache/**
+    - env/**
+    - tests/**
+    - handler.pyc
+    - intents.json
+    - LICENSE
+    - list_of_foods.txt
+    - README.md
+    - requirements.txt
+    - sample_utterances.txt
+
+functions:
+  hello:
+    handler: handler.hello
