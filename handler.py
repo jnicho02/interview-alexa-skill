@@ -53,6 +53,8 @@ def on_intent(request, session):
     say = "not sure what to do with {}".format(name)
     if name == "CanItEat":
         say = can_it_eat(intent)
+    if name == "HowsItGoing":
+        say = hows_it_going(intent)
 #        raise ValueError("Invalid intent")
     session_attributes = {}
     card_title = name
@@ -85,6 +87,7 @@ def goodbye():
 
 
 def can_it_eat(intent):
+    say = "I am not sure"
     things_a_greyhound_can_eat = [
         'banana',
         'dog food',
@@ -109,7 +112,6 @@ def can_it_eat(intent):
         'chocolate' : 'It contains a cardiac stimulant and a diuretic. An overdose of chocolate can increase the dog’s heart rate or may cause the heart to beat irregularly. Death is quite possible, especially with exercise.',
     }
     food = value(intent, 'food')
-    say = "I am not sure"
     if food in things_a_greyhound_mustnt_eat:
         say = "No, a greyhound must not eat {}. {}".format(food, things_a_greyhound_mustnt_eat[food])
     if food in things_a_greyhound_shouldnt_eat:
@@ -118,6 +120,13 @@ def can_it_eat(intent):
         say = "Yes, a greyhound can eat {}.".format(food)
     return say
 
+
+def hows_it_going(intent):
+    say = "I am not sure"
+    subject = value(intent, 'subject')
+    if subject in "this talk":
+        say = "I think you are mad, Jez. There is a {}% chance of success. ".format(90)
+    return say
 
 # --------------- Helpers ---------------
 

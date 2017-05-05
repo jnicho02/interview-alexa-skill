@@ -1,1 +1,3 @@
-CanItEat can a greyhound eat {food}
+HowsItGoing how is {subject} going
+HowsItGoing is {subject} a good idea
+HowsItGoing what do you think about {subject}

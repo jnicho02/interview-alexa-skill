@@ -1,3 +1,5 @@
+import re
+
 class MockAlexa(object):
     """A pretend Alexa.
     """
@@ -35,18 +37,29 @@ class MockAlexa(object):
         if "stop".format(self.name) in words:
             request_type = "IntentRequest"
             intent_name = "AMAZON.StopIntent"
-        sample_utterance = "CanItEat can a greyhound eat {food}"
+
         print("you asked, '{}'".format(words))
-        if "can a greyhound eat" in words:
+
+        sample_utterance = "HowsItGoing how is {subject} going"
+#        p = re.compile('^\w+ (.*){(.*)}(.*)')
+#        m = p.match(words)
+        utterance_regex = r'how is (.*) going'
+        value = re.match(utterance_regex, words)
+        if value != None:
+            intent_name = re.match(r'^\w+', sample_utterance).group(0)
+            print("intent_name is '{}'".format(intent_name))
+            value = value.group(1)
+            print("value is '{}'".format(value))
             request_type = "IntentRequest"
-            intent_name = "CanItEat"
-            food = "alcohol"
             slots = {
-                "food": {
-                    "name": "food",
-                    "value": food
+                "subject": {
+                    "name": "subject",
+                    "value": value
                 }
             }
+        print("request_type is '{}'".format(request_type))
+        print("slots is '{}'".format(slots))
+
         request = self.alexa(new_session, request_type, intent_name, slots)
         service_response = self.handler.hello(request, None)
         return service_response

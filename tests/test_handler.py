@@ -32,22 +32,22 @@ class TestHandler(unittest.TestCase):
         assert "Thank you for speaking to me" in service_response["response"]["outputSpeech"]["text"]
 
 
-    def test_can_it_eat_alcohol_unit(self):
+    def test_how_is_this_talk_going(self):
         intent = {
-            "name": "CanItEat",
+            "name": "HowsItGoing",
             "slots": {
-                "food": {
-                  "name": "food",
-                  "value": "alcohol"
+                "subject": {
+                  "name": "subject",
+                  "value": "this talk"
                 }
             }
         }
-        response = handler.can_it_eat(intent)
-        assert "No, a greyhound must not eat alcohol" in response
+        response = handler.hows_it_going(intent)
+        assert "I think you are mad" in response
 
 
     def test_can_it_eat_alcohol(self):
         alexa = MockAlexa("interview", handler)
         alexa.ask("open interview")
-        service_response = alexa.ask("can a greyhound eat alcohol")
-        assert "No, a greyhound must not eat alcohol" in service_response["response"]["outputSpeech"]["text"]
+        service_response = alexa.ask("how is this talk going")
+        assert "I think you are med" in service_response["response"]["outputSpeech"]["text"]

@@ -2,6 +2,7 @@
 Amazon Alexa skill for 'Interview With Alexa' conference talk
 
 # to test
+source env/bin/activate
 py.test tests/test_handler.py
 
 # to create
@@ -26,9 +27,9 @@ $ pip install -r requirements.txt
 $ py.test tests/test_handler.py
 
 $ sls deploy
-this created updated the Lambda function
+this creates/updates the Lambda function
 
 created a new Alexa Skill with language English (U.K.)
 named it 'interview'
 added the interaction model (didn't use the builder as it insisted on submitting for testing!)
-configured the ARN from the Lambda function
+configured it with the ARN from the Lambda function
