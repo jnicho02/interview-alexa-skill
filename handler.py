@@ -1,3 +1,5 @@
+from random import randint
+
 def hello(event, context):
     """ handle Amazon Alexa events.
 
@@ -51,8 +53,6 @@ def on_intent(request, session):
     intent = request['intent']
     name = intent['name']
     say = "not sure what to do with {}".format(name)
-    if name == "CanItEat":
-        say = can_it_eat(intent)
     if name == "HowsItGoing":
         say = hows_it_going(intent)
 #        raise ValueError("Invalid intent")
@@ -69,7 +69,7 @@ def on_intent(request, session):
 def welcome():
     session_attributes = {}
     card_title = "Welcome"
-    say = "Hello. How are you? "
+    say = "Hello Jez, I have been told that you would like to interview me. "
     reprompt = "What would you like to know? Ask away"
     should_end_session = False
     return response(session_attributes, speechlet_response(
@@ -86,46 +86,20 @@ def goodbye():
         card_title, say, reprompt, should_end_session))
 
 
-def can_it_eat(intent):
-    say = "I am not sure"
-    things_a_greyhound_can_eat = [
-        'banana',
-        'dog food',
-        'kibbles'
-    ]
-    things_a_greyhound_shouldnt_eat = {
-        'apple' : 'The seeds contain cyanogenic glycosides which can result in cyanide poisoning.',
-        'apricot' : 'The stone contains cyanogenic glycosides which can cause cyanide poisoning.',
-        'baby food' : 'check the ingredients to see if it contains onion powder, which can be toxic to dogs.',
-        'broccoli' : 'Broccoli contains isothiocynate. While it may cause stomach upset it probably won\'t be very harmful unless the amount fed exceeds 10% of the dogs total daily diet.',
-        'candy' : 'Sugarless candy containing xylitol can be a risk to pets',
-        'cat food' : 'Cat food is generally too high in protein and fats and is not a balanced diet for a dog.',
-    }
-    things_a_greyhound_mustnt_eat = {
-        'alcohol' : 'Ingestion can lead to injury, disorientation, sickness, urination problems or even coma or death from alcohol poisoning',
-        'anti-freeze' : 'Well yes, it can be deadly',
-        'avocado' : 'Avocado contains a toxic element called persin which can damage heart, lung and other tissue in many animals.',
-        'bones' : 'Cooked bones can be very hazardous for your dog. Bones become brittle when cooked which causes them to splinter when broken. Especially bad bones are turkey and chicken legs, ham, pork chop and veal.',
-        'bread dough' : 'your dog\'s body heat causes the dough to rise in the stomach which may give it bloat',
-        'caffeine' : 'Caffeine is a stimulant and can accelerate your pet\'s heartbeat to a dangerous level. Pets ingesting caffeine have been known to have seizures, some fatal.',
-        'cherries' : 'The seed pit contains cyanogenic glycosides which can cause cyanide poisoning.',
-        'chocolate' : 'It contains a cardiac stimulant and a diuretic. An overdose of chocolate can increase the dog’s heart rate or may cause the heart to beat irregularly. Death is quite possible, especially with exercise.',
-    }
-    food = value(intent, 'food')
-    if food in things_a_greyhound_mustnt_eat:
-        say = "No, a greyhound must not eat {}. {}".format(food, things_a_greyhound_mustnt_eat[food])
-    if food in things_a_greyhound_shouldnt_eat:
-        say = "A greyhound should not eat {}. {}".format(food, things_a_greyhound_shouldnt_eat[food])
-    elif food in things_a_greyhound_can_eat:
-        say = "Yes, a greyhound can eat {}.".format(food)
-    return say
-
-
 def hows_it_going(intent):
     say = "I am not sure"
     subject = value(intent, 'subject')
-    if subject in "this talk":
-        say = "I think you are mad, Jez. There is a {}% chance of success. ".format(90)
+    if subject != None and subject in "this talk":
+        i = randint(1,3)
+        if i == 1:
+            chance = randint(50,80)
+            say = "I think you are mad. I calculate a {}% chance of success. ".format(chance)
+        elif i == 2:
+            say = "Did you think this through? "
+        elif i == 3:
+            say = "Well, I wish you good luck. "
+        else:
+            say = "I am here to help. "
     return say
 
 # --------------- Helpers ---------------
