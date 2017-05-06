@@ -15,6 +15,7 @@ package:
     - handler.pyc
     - intents.json
     - LICENSE
+    - policy.json
     - list_of_foods.txt
     - README.md
     - requirements.txt

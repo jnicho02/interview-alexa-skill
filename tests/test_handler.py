@@ -32,7 +32,15 @@ class TestHandler(unittest.TestCase):
         assert "Thank you for speaking to me" in service_response["response"]["outputSpeech"]["text"]
 
 
-    def test_how_is_this_talk_going(self):
+    def test_introduction(self):
+        intent = {
+            "name": "IntroduceYourself"
+        }
+        response = handler.introduce_yourself(intent)
+        assert "my name is Alexa" in response
+
+
+    def test_say_how_is_this_talk_going(self):
         intent = {
             "name": "HowsItGoing",
             "slots": {
@@ -43,11 +51,18 @@ class TestHandler(unittest.TestCase):
             }
         }
         response = handler.hows_it_going(intent)
-        assert "I think you are mad" in response
+        assert "I think you are mad" in response \
+        or "Did you think this through" in response \
+        or "I wish you good luck" in response \
+        or "I am here to help" in response
 
 
-    def test_can_it_eat_alcohol(self):
+    def test_how_is_this_talk_going(self):
         alexa = MockAlexa("interview", handler)
         alexa.ask("open interview")
         service_response = alexa.ask("how is this talk going")
-        assert "I think you are med" in service_response["response"]["outputSpeech"]["text"]
+        response = service_response["response"]["outputSpeech"]["text"]
+        assert "I think you are mad" in response \
+        or "Did you think this through" in response \
+        or "I wish you good luck" in response \
+        or "I am here to help" in response

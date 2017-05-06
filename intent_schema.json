@@ -1,5 +1,8 @@
 {
     "intents": [{
+            "intent": "IntroduceYourself"
+        },
+        {
             "intent": "HowsItGoing",
             "slots": [{
                 "name": "subject",

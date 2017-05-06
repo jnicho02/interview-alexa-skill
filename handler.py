@@ -55,7 +55,8 @@ def on_intent(request, session):
     say = "not sure what to do with {}".format(name)
     if name == "HowsItGoing":
         say = hows_it_going(intent)
-#        raise ValueError("Invalid intent")
+    if name == "IntroduceYourself":
+        say = introduce_yourself(intent)
     session_attributes = {}
     card_title = name
     reprompt = "What would you like to know? Ask away"
@@ -80,8 +81,8 @@ def goodbye():
     session_attributes = {}
     card_title = "Session Ended"
     say = "Thank you for speaking to me. Have a nice day! "
-    should_end_session = True
     reprompt = None
+    should_end_session = True
     return response(session_attributes, speechlet_response(
         card_title, say, reprompt, should_end_session))
 
@@ -90,16 +91,25 @@ def hows_it_going(intent):
     say = "I am not sure"
     subject = value(intent, 'subject')
     if subject != None and subject in "this talk":
-        i = randint(1,3)
+        i = randint(1,4)
         if i == 1:
             chance = randint(50,80)
-            say = "I think you are mad. I calculate a {}% chance of success. ".format(chance)
+            say = "I think you are mad. \
+            I calculate a {}% chance of success. ".format(chance)
         elif i == 2:
             say = "Did you think this through? "
         elif i == 3:
             say = "Well, I wish you good luck. "
         else:
             say = "I am here to help. "
+    return say
+
+
+def introduce_yourself(intent):
+    types_of_chancer = ["fool", "chancer", "brave man"]
+    i = randint(0, len(types_of_chancer) - 1)
+    say = "Hello, my name is Alexa. \
+    I will be assisting this {}".format(types_of_chancer[i])
     return say
 
 # --------------- Helpers ---------------
