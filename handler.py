@@ -59,7 +59,7 @@ def on_intent(request, session):
         say = introduce_yourself(intent)
     session_attributes = {}
     card_title = name
-    reprompt = "What would you like to know? Ask away"
+    reprompt = None
     should_end_session = False
     return response(session_attributes, speechlet_response(
         card_title, say, reprompt, should_end_session))
@@ -90,26 +90,23 @@ def goodbye():
 def hows_it_going(intent):
     say = "I am not sure"
     subject = value(intent, 'subject')
+    chance = randint(50,80)
+    this_talk = [
+        "I think you are mad. \
+        I calculate a {}% chance of success. ".format(chance),
+        "Did you think this through? ",
+        "Well, I wish you good luck. ",
+        "I am here to help. "
+    ]
     if subject != None and subject in "this talk":
-        i = randint(1,4)
-        if i == 1:
-            chance = randint(50,80)
-            say = "I think you are mad. \
-            I calculate a {}% chance of success. ".format(chance)
-        elif i == 2:
-            say = "Did you think this through? "
-        elif i == 3:
-            say = "Well, I wish you good luck. "
-        else:
-            say = "I am here to help. "
+        say = pick_one(this_talk)
     return say
 
 
 def introduce_yourself(intent):
     types_of_chancer = ["fool", "chancer", "brave man"]
-    i = randint(0, len(types_of_chancer) - 1)
     say = "Hello, my name is Alexa. \
-    I will be assisting this {}".format(types_of_chancer[i])
+    I will be assisting this {}".format(pick_one(types_of_chancer))
     return say
 
 # --------------- Helpers ---------------
@@ -119,6 +116,12 @@ def value(intent, name):
         return intent['slots'][name]['value'].lower()
     except KeyError:
         return None
+
+
+def pick_one(say_array):
+    i = randint(0, len(say_array) - 1)
+    say = say_array[i]
+    return say
 
 
 def speechlet_response(title, say, reprompt, should_end_session):
