@@ -19,6 +19,12 @@ class MockAlexa(object):
         return new_session
 
 
+    def ask_text(self, words):
+        service_response = self.ask(words)
+        text = service_response["response"]["outputSpeech"]["text"]
+        return text
+
+
     def ask(self, words):
         new_session = self.activate()
         intent_name = None
@@ -41,8 +47,6 @@ class MockAlexa(object):
         print("you asked, '{}'".format(words))
 
         sample_utterance = "HowsItGoing how is {subject} going"
-#        p = re.compile('^\w+ (.*){(.*)}(.*)')
-#        m = p.match(words)
         utterance_regex = r'how is (.*) going'
         value = re.match(utterance_regex, words)
         if value != None:
@@ -57,6 +61,10 @@ class MockAlexa(object):
                     "value": value
                 }
             }
+        if "say hello" in words:
+            intent_name = "IntroduceYourself"
+            request_type = "IntentRequest"
+
         print("request_type is '{}'".format(request_type))
         print("slots is '{}'".format(slots))
 
@@ -73,7 +81,8 @@ class MockAlexa(object):
         service_request = self.alexa(new_session, request_type, intent_name, slots)
         service_request["request"]["reason"] = 'EXCEEDED_MAX_REPROMPTS'
         service_response = self.handler.hello(service_request, None)
-        return service_response
+        text = service_response["response"]["outputSpeech"]["text"]
+        return text
 
 
     def alexa(self, new_session, request_type, intent_name, slots):
