@@ -1,5 +1,6 @@
 IntroduceYourself say hello
 IntroduceYourself why not introduce yourself
 HowsItGoing how is {subject} going
+HowsItGoing how do you think is {subject} going
 HowsItGoing is {subject} a good idea
 HowsItGoing what do you think about {subject}
