@@ -72,3 +72,10 @@ class TestHandler(unittest.TestCase):
         or "Did you think this through" in alexa_says \
         or "I wish you good luck" in alexa_says \
         or "I am here to help" in alexa_says
+
+
+    def test_how_is_this_conference_going(self):
+        alexa = MockAlexa("interview", handler)
+        alexa.ask("open interview")
+        alexa_says = alexa.ask_text("how is the conference going")
+        assert "wonderfully" in alexa_says

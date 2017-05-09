@@ -1,4 +1,4 @@
-from random import randint
+import random
 
 def hello(event, context):
     """ handle Amazon Alexa events.
@@ -90,7 +90,7 @@ def goodbye():
 def hows_it_going(intent):
     say = "I am not sure"
     subject = value(intent, 'subject')
-    chance = randint(50,80)
+    chance = random.randint(50,80)
     this_talk = [
         "I think you are mad. \
         I calculate a {}% chance of success. ".format(chance),
@@ -98,15 +98,17 @@ def hows_it_going(intent):
         "Well, I wish you good luck. ",
         "I am here to help. "
     ]
-    if subject != None and subject in "this talk":
-        say = pick_one(this_talk)
+    if "talk" in subject:
+        say = random.choice(this_talk)
+    elif "conference" in subject:
+        say = "the conference is going wonderfully. And the sun has come out. "
     return say
 
 
 def introduce_yourself(intent):
     types_of_chancer = ["fool", "chancer", "brave man"]
     say = "Hello, my name is Alexa. \
-    I will be assisting this {}".format(pick_one(types_of_chancer))
+    I will be assisting this {}".format(random.choice(types_of_chancer))
     return say
 
 # --------------- Helpers ---------------
@@ -116,12 +118,6 @@ def value(intent, name):
         return intent['slots'][name]['value'].lower()
     except KeyError:
         return None
-
-
-def pick_one(say_array):
-    i = randint(0, len(say_array) - 1)
-    say = say_array[i]
-    return say
 
 
 def speechlet_response(title, say, reprompt, should_end_session):
