@@ -31,7 +31,23 @@ provider:
 ## starter code and tests
 copied in my standard handler.py, intents.json,
 copied requirements.txt + tests folder + __init__.py, conftest.py, mock_alexa.py, test_handler.py
-exluded them all in serverless.yml
+exluded them (and just everything bar handler.py) in serverless.yml
+```
+package:
+  exclude:
+    - __pycache__/**
+    - .cache/**
+    - env/**
+    - tests/**
+    - handler.pyc
+    - intents.json
+    - LICENSE
+    - policy.json
+    - list_of_foods.txt
+    - README.md
+    - requirements.txt
+    - sample_utterances.txt
+```
 
 ## python (for testing)
 * used a python virtual environment
