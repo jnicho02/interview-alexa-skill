@@ -6,22 +6,21 @@ source env/bin/activate
 py.test tests/test_handler.py
 
 # to create
-
+## git
 * add a new repo in github
 * clone it locally
 
-* install Serverless
+## Serverless
+install
 ```
 $ npm install -g serverless
 $ serverless create --template aws-python
 ```
 
-* update serverless.yml
-
-** changed the service name
-
-** set the environment to python 3, in Europe zone
+update serverless.yml with the service name, set the environment to python 3, locate in Europe zone
 ```
+service: interview
+
 provider:
   name: aws
   runtime: python3.6
@@ -29,10 +28,12 @@ provider:
   region: eu-west-1
 ```
 
+## starter code and tests
 copied in my standard handler.py, intents.json,
 copied requirements.txt + tests folder + __init__.py, conftest.py, mock_alexa.py, test_handler.py
 exluded them all in serverless.yml
 
+## python (for testing)
 * used a python virtual environment
 ```
 $ virtualenv -p python3 env
@@ -41,11 +42,13 @@ $ pip install -r requirements.txt
 $ py.test tests/test_handler.py
 ```
 
+## deployment
 * deployed the Lambda function via Serverless
 ```
 $ sls deploy
 ```
 
+## Alexa skill
 * created a new Alexa Skill with language English (U.K.)
 * named it 'interview'
 * added the interaction model (didn't use the builder as it insisted on submitting for testing!)
